@@ -1,0 +1,137 @@
+import java.util.*;
+
+public class TaskScheduler {
+
+    public static <T> List<T> mergeAlternately(List<T> list1, List<T> list2) {
+        List<T> mergedList = new ArrayList<>();
+        int maxSize = Math.max(list1.size(), list2.size());
+        for (int i = 0; i < maxSize; i++) {
+            if (i < list1.size()) mergedList.add(list1.get(i));
+            if (i < list2.size()) mergedList.add(list2.get(i));
+        }
+        return mergedList;
+    }
+
+    public static <K, V> void printMap(Map<K, V> map) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
+    static class Task implements Comparable<Task> {
+        String taskName;
+        int priority;
+        int duration;
+
+        public Task(String taskName, int priority, int duration) {
+            this.taskName = taskName;
+            this.priority = priority;
+            this.duration = duration;
+        }
+
+        @Override
+        public int compareTo(Task other) {
+            if (this.priority != other.priority) {
+                return Integer.compare(other.priority, this.priority);
+            } else {
+                return Integer.compare(this.duration, other.duration);
+            }
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[Priority %d] %s (Duration: %d mins)", priority, taskName, duration);
+        }
+    }
+
+    static class Scheduler {
+        private PriorityQueue<Task> scheduledTasks = new PriorityQueue<>();
+        private Queue<Task> pendingTasks = new LinkedList<>();
+
+        public void addTask(Task task) {
+            scheduledTasks.offer(task);
+            System.out.println("Task Added: " + task);
+        }
+
+        public void processTask() {
+            if (!scheduledTasks.isEmpty()) {
+                Task task = scheduledTasks.poll();
+                System.out.println("Processing Task: " + task);
+            } else if (!pendingTasks.isEmpty()) {
+                Task task = pendingTasks.poll();
+                System.out.println("Processing Task: " + task);
+            } else {
+                System.out.println("No tasks to process.");
+            }
+        }
+
+        public void delayTask(String taskName) {
+            Iterator<Task> iterator = scheduledTasks.iterator();
+            while (iterator.hasNext()) {
+                Task task = iterator.next();
+                if (task.taskName.equals(taskName)) {
+                    pendingTasks.offer(task);
+                    iterator.remove();
+                    System.out.println("Delaying Task: " + taskName);
+                    return;
+                }
+            }
+            System.out.println("Task not found: " + taskName);
+        }
+
+        public void displayTasks() {
+            System.out.println("Scheduled Tasks (sorted by priority):");
+            if (scheduledTasks.isEmpty()) {
+                System.out.println("(No priority tasks)");
+            } else {
+                scheduledTasks.stream().sorted().forEach(System.out::println);
+            }
+            System.out.println("Pending Tasks (FIFO Order):");
+            if (pendingTasks.isEmpty()) {
+                System.out.println("(No pending tasks)");
+            } else {
+                pendingTasks.forEach(task -> System.out.println(task.taskName + " (Priority: " + task.priority + ", Duration: " + task.duration + " mins)"));
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        List<String> list1 = Arrays.asList("A", "B", "C");
+        List<String> list2 = Arrays.asList("1", "2", "3", "4");
+        System.out.println("Merged List: " + mergeAlternately(list1, list2));
+
+        Map<String, Integer> map = new HashMap<>();
+        map.put("jaina", 30);
+        map.put("asan", 25);
+        printMap(map);
+
+        Scheduler scheduler = new Scheduler();
+        scheduler.addTask(new Task("Code ", 3, 20));
+        scheduler.addTask(new Task("System Update", 5, 45));
+        scheduler.addTask(new Task("Database Backup", 2, 30));
+        scheduler.addTask(new Task("Deploy New Feature", 5, 50));
+        scheduler.addTask(new Task("Bug Fixing", 4, 25));
+        System.out.println();
+        scheduler.displayTasks();
+        System.out.println();
+
+        scheduler.processTask();
+        scheduler.delayTask("Code Review");
+        System.out.println();
+        scheduler.displayTasks();
+        System.out.println();
+
+        scheduler.delayTask("Database Backup");
+        System.out.println();
+        scheduler.displayTasks();
+        System.out.println();
+
+        scheduler.processTask();
+        scheduler.processTask();
+        scheduler.processTask();
+        scheduler.processTask();
+        scheduler.processTask();
+    }
+}
