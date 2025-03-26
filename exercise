@@ -1,0 +1,73 @@
+import java.util.TreeSet;
+import java.util.Iterator;
+
+public class TreeSetExamples {
+    public static void main(String[] args) {
+        // Создаём TreeSet и добавляем элементы
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        treeSet.add(10);
+        treeSet.add(3);
+        treeSet.add(7);
+        treeSet.add(1);
+        treeSet.add(5);
+
+        System.out.println("Исходный TreeSet: " + treeSet);
+
+        // 1. Перебор всех элементов в TreeSet
+        System.out.println("\n1. Перебор элементов в TreeSet:");
+        System.out.println("Используем for-each:");
+        for (int num : treeSet) {
+            System.out.println(num);
+        }
+
+        System.out.println("\nИспользуем Iterator:");
+        Iterator<Integer> iterator = treeSet.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        System.out.println("\nИспользуем forEach() с лямбда-выражением:");
+        treeSet.forEach(num -> System.out.println(num));
+
+        // 2. Обратный порядок элементов в TreeSet
+        System.out.println("\n2. TreeSet в обратном порядке:");
+        Iterator<Integer> descendingIterator = treeSet.descendingIterator();
+        while (descendingIterator.hasNext()) {
+            System.out.print(descendingIterator.next() + " ");
+        }
+        System.out.println();
+
+        // 3. Поиск чисел меньше 7
+        System.out.println("\n3. Числа меньше 7:");
+        TreeSet<Integer> lessThanSeven = (TreeSet<Integer>) treeSet.headSet(7);
+        System.out.println(lessThanSeven);
+
+        // 4. Получение наибольшего элемента, который меньше заданного
+        int value = 6;
+        Integer lowerValue = treeSet.lower(value);
+        if (lowerValue != null) {
+            System.out.println("\n4. Наибольший элемент, меньший чем " + value + ": " + lowerValue);
+        } else {
+            System.out.println("\n4. Нет элементов, меньших чем " + value);
+        }
+
+        // 5. Получение элемента, который меньше или равен заданному
+        Integer floorValue = treeSet.floor(value);
+        System.out.println("\n5. Наибольший элемент, меньший или равный " + value + ": " + floorValue);
+
+        // 6. Удаление первого элемента
+        Integer firstElement = treeSet.pollFirst();
+        System.out.println("\n6. Удалённый первый элемент: " + firstElement);
+        System.out.println("TreeSet после удаления: " + treeSet);
+
+        // 7. Удаление заданного элемента
+        int elementToRemove = 7;
+        boolean removed = treeSet.remove(elementToRemove);
+        if (removed) {
+            System.out.println("\n7. TreeSet после удаления элемента " + elementToRemove + ": " + treeSet);
+        } else {
+            System.out.println("\n7. Элемент " + elementToRemove + " не найден в TreeSet.");
+        }
+    }
+}
+
