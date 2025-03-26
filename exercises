@@ -1,0 +1,40 @@
+import java.util.PriorityQueue;
+import java.util.Collections;
+import java.util.Iterator;
+
+public class PriorityQueueExercises {
+    public static void main(String[] args) {
+        // 1. Создание приоритетной очереди и добавление элементов
+        PriorityQueue<String> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add("Красный");
+        priorityQueue.add("Зелёный");
+        priorityQueue.add("Синий");
+        priorityQueue.add("Жёлтый");
+        priorityQueue.add("Фиолетовый");
+
+        System.out.println("Приоритетная очередь: " + priorityQueue);
+
+        // 2. Подсчёт количества элементов
+        System.out.println("\nКоличество элементов в очереди: " + priorityQueue.size());
+
+        // 3. Извлечение первого элемента (без удаления)
+        System.out.println("\nПервый элемент (peek): " + priorityQueue.peek());
+
+        // 4. Извлечение и удаление первого элемента
+        System.out.println("\nУдалённый первый элемент (poll): " + priorityQueue.poll());
+        System.out.println("Очередь после удаления: " + priorityQueue);
+
+        // 5. Преобразование в очередь с максимальным приоритетом
+        PriorityQueue<String> maxPriorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+        maxPriorityQueue.addAll(priorityQueue);
+        System.out.println("\nОчередь с максимальным приоритетом: " + maxPriorityQueue);
+
+    
+
+        // 7. Итерация по всем элементам (for-each)
+        System.out.println("\nИтерация по элементам (for-each):");
+        for (String color : priorityQueue) {
+            System.out.println(color);
+        }
+    }
+}
