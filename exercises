@@ -1,0 +1,72 @@
+import java.util.*;
+
+public class HushSetExample {
+    public static void main(String[] args) {
+
+        Set<String> hashSet = new HashSet<>();
+        hashSet.add("Jaina");
+        hashSet.add("Nazima");
+        hashSet.add("Akbar");
+
+
+        System.out.println("HashSet: " + hashSet);
+
+        String[] array = hashSet.toArray(new String[0]);
+
+        System.out.println("Массив: " + Arrays.toString(array));
+
+        String newName = "Asan";
+        hashSet.add(newName);
+        System.out.println("HashSet после добавления элемента: " + hashSet);
+
+        Set<String> hashSet1 = new HashSet<>();
+        if (hashSet.isEmpty()) {
+            System.out.println("hashSet1 пустой");
+        } else {
+            System.out.println("hashSet1 не пустой");
+        }
+
+        hashSet1.add("Jainagyl");
+        System.out.println("hashSet1 после добавления элемента: " + hashSet1);
+
+        Set<Integer> hashSet2 = new HashSet<>();
+        hashSet2.add(3);
+        hashSet2.add(8);
+        hashSet2.add(1);
+        hashSet2.add(6);
+        hashSet2.add(9);
+        hashSet2.add(5);
+        hashSet2.add(2);
+        System.out.println("hushSet:" + hashSet2);
+
+        System.out.print("Числа меньше 7: ");
+        for (int num : hashSet2) {
+            if (num < 7) {
+                System.out.print(num + " ");
+            }
+            Set<String> set1 = new HashSet<>();
+            set1.add("Red");
+            set1.add("Green");
+            set1.add("Blue");
+            set1.add("Yellow");
+
+            Set<String> set2 = new HashSet<>();
+            set2.add("Green");
+            set2.add("Blue");
+            set2.add("Purple");
+
+            // Вывод содержимого множества до сравнения
+            System.out.println("Множество 1: " + set1);
+            System.out.println("Множество 2: " + set2);
+
+            // Найти пересечение (одинаковые элементы) и сохранить их в set1
+            set1.retainAll(set2);
+
+            // Вывод пересечения
+            System.out.println("Одинаковые элементы в обоих множествах: " + set1);
+        }
+        // Очистка HashSet
+        hashSet.clear();
+
+    }
+}
