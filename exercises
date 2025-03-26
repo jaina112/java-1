@@ -1,0 +1,63 @@
+import java.util.*;
+import java.util.function.Function;
+
+
+public class Exercises {
+    public static void main(String[] args) {
+        List<String> list_Strings = new ArrayList<String>();
+        list_Strings.add("Red");
+        list_Strings.add("Green");
+        list_Strings.add("Orange");
+        list_Strings.add("White");
+        list_Strings.add("Black");
+        System.out.println(list_Strings);
+
+        list_Strings.add("red");
+        list_Strings.add("Green");
+        list_Strings.add("White");
+        System.out.println("Список дубликатов:" + list_Strings);
+
+        Set<String> uniqueColors = new HashSet<>(list_Strings);
+        System.out.println("уникальные коллекции:" + uniqueColors);
+        //txercise2
+        String substring = "red";
+        List<String> filteredColors = new ArrayList<>();
+        for (String color : list_Strings) {
+            if (color.toLowerCase().contains(substring.toLowerCase())) {
+                filteredColors.add(color);
+            }
+        }
+        //exercise3
+        list_Strings.sort((color1, color2) -> color2.compareTo(color1));
+        System.out.println("Sorted Colors:" + list_Strings);
+        //e[ercise4
+        List<String> uppercaseColors = new ArrayList<>();
+        for (String color : list_Strings) {
+            uppercaseColors.add(color.toUpperCase());
+        }
+        System.out.println("Цвета в заглавных буквах: " + uppercaseColors);
+        // Задача 17: Очистка списка массивов
+        List<int[]> listOfArrays = new ArrayList<>();
+        listOfArrays.add(new int[]{1, 2, 3});
+        listOfArrays.add(new int[]{4, 5, 6});
+        listOfArrays.add(new int[]{7, 8, 9});
+
+        System.out.println("\nСписок массивов до очистки:");
+        for (int[] array : listOfArrays) {
+            System.out.println(Arrays.toString(array));
+        }
+
+        listOfArrays.clear();
+
+        System.out.println("\nСписок массивов после очистки:");
+        if (listOfArrays.isEmpty()) {
+            System.out.println("Список пуст");
+        } else {
+            for (int[] array : listOfArrays) {
+                System.out.println(Arrays.toString(array));
+            }
+        }
+    }
+}
+
+
