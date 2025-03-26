@@ -1,0 +1,54 @@
+import java.util.Collections;
+import java.util.LinkedList;
+
+public class LinkedListExercises {
+    public static void main(String[] args) {
+        // Создание LinkedList и добавление начальных элементов
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.add("apple");
+        linkedList.add("banana");
+        linkedList.add("grapes");
+
+        System.out.println("LinkedList после добавления элементов: " + linkedList);
+
+        // Вставка элемента в начало и конец списка
+        linkedList.addFirst("orange");
+        linkedList.addLast("watermelon");
+
+        System.out.println("LinkedList после вставки в начало и конец: " + linkedList);
+
+        // Меняем местами два элемента в списке
+        int index1 = 1;  // Индекс первого элемента
+        int index2 = 3;  // Индекс второго элемента
+
+        // Проверка, что индексы в пределах размера списка
+        if (index1 < linkedList.size() && index2 < linkedList.size()) {
+
+            String temp = linkedList.get(index1);
+
+            // Меняем местами элементы
+            linkedList.set(index1, linkedList.get(index2));
+            linkedList.set(index2, temp);
+
+            System.out.println("LinkedList после обмена элементов на индексах " + index1 + " и " + index2 + ": " + linkedList);
+        } else {
+            System.out.println("Ошибка: Один из индексов выходит за пределы списка.");
+            // 3. Напишите программу Java для удаления первого и последнего элементов из связанного списка
+            linkedList.remove("banana");
+            //6. Напишите программу Java для перемешивания элементов в связанном списке.
+            Collections.shuffle(linkedList);
+            System.out.println("после перемешивание:" + linkedList);
+            //12. Напишите программу Java для удаления указанного элемента из связанного списка
+            String ElementRemove = " banana";
+            boolean removed = linkedList.remove(ElementRemove);
+            if (removed) {
+                System.out.println("element removed");
+
+            } else {
+                System.out.println("элемент не найден");
+
+            }
+
+        }
+    }
+}
