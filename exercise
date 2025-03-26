@@ -1,0 +1,53 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Collection;
+
+public class HashMapExercises {
+    public static void main(String[] args) {
+        // 1. Создание HashMap и добавление элементов (ключ-значение)
+        HashMap<Integer, String> hashMap = new HashMap<>();
+        hashMap.put(1, "Красный");
+        hashMap.put(2, "Зелёный");
+        hashMap.put(3, "Синий");
+        hashMap.put(4, "Жёлтый");
+        hashMap.put(5, "Фиолетовый");
+
+        System.out.println("Исходный HashMap: " + hashMap);
+
+        // 2. Подсчёт количества сопоставлений (размер HashMap)
+        System.out.println("\nКоличество элементов в HashMap: " + hashMap.size());
+
+        // 3. Получение поверхностной копии HashMap
+        HashMap<Integer, String> copyHashMap = new HashMap<>(hashMap);
+        System.out.println("\nПоверхностная копия HashMap: " + copyHashMap);
+
+        // 4. Проверка, содержит ли карта указанное значение
+        String valueToCheck = "Синий";
+        if (hashMap.containsValue(valueToCheck)) {
+            System.out.println("\nHashMap содержит значение: " + valueToCheck);
+        } else {
+            System.out.println("\nHashMap НЕ содержит значение: " + valueToCheck);
+        }
+
+        // 5. Создание представления набора отображений (entrySet)
+        Set<Map.Entry<Integer, String>> entrySet = hashMap.entrySet();
+        System.out.println("\nНабор отображений (ключ=значение):");
+        for (Map.Entry<Integer, String> entry : entrySet) {
+            System.out.println(entry.getKey() + " = " + entry.getValue());
+        }
+
+        // 6. Получение значения по указанному ключу
+        int keyToFind = 3;
+        String value = hashMap.get(keyToFind);
+        System.out.println("\nЗначение для ключа " + keyToFind + ": " + value);
+
+        // 7. Получение набора ключей
+        Set<Integer> keySet = hashMap.keySet();
+        System.out.println("\nНабор ключей: " + keySet);
+
+        // 8. Получение представления коллекции значений
+        Collection<String> values = hashMap.values();
+        System.out.println("\nКоллекция значений: " + values);
+    }
+}
